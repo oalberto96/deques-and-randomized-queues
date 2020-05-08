@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
     private Node first = null;
@@ -27,6 +28,9 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void addFirst(Item item){
+        if(item == null){
+            throw new IllegalArgumentException();
+        }
         Node oldFirst = first;
         first = new Node(item);
         first.next = oldFirst;
@@ -36,6 +40,9 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void addLast(Item item){
+        if(item == null){
+            throw new IllegalArgumentException();
+        }
         Node oldLast = last;
         last = new Node(item);
         last.prev = oldLast;
@@ -45,6 +52,9 @@ public class Deque<Item> implements Iterable<Item> {
 
     public Item removeFirst(){
         Node oldFirst = first;
+        if(oldFirst == null){
+            throw new NoSuchElementException();
+        }
         first = oldFirst.next;
         if(first == null) last = first;
         return oldFirst.item;
@@ -52,9 +62,15 @@ public class Deque<Item> implements Iterable<Item> {
 
     public Item removeLast(){
         Node oldLast = last;
+        if(oldLast == null){
+            throw new NoSuchElementException();
+        }
         last = oldLast.prev;
-        last.next = null;
-        if(last == null) first = last;
+        if(last != null){
+            last.next = null;
+        } else {
+            first = last;
+        }
         return oldLast.item;
     }
 
@@ -101,7 +117,9 @@ public class Deque<Item> implements Iterable<Item> {
         System.out.println(d);
 
         d.removeLast();
+        d.removeFirst();
         System.out.println(d);
+        d.removeFirst();
 
         System.out.println(d.isEmpty());
     }
