@@ -5,6 +5,30 @@ public class Deque<Item> implements Iterable<Item> {
     private Node first = null;
     private Node last = null;
 
+    private class ListIterator implements Iterator<Item> {
+        private Node current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Item next() {
+            if(current == null){
+                throw new NoSuchElementException();
+            }
+            Item item = current.item;
+            current = current.next;
+            return item;
+        }
+    }
+
+    public Iterator<Item> iterator(){
+        return new ListIterator();
+    }
+
+
     private class Node{
         Item item;
         Node next;
@@ -74,10 +98,6 @@ public class Deque<Item> implements Iterable<Item> {
         return oldLast.item;
     }
 
-    public Iterator<Item> iterator(){
-        return null;
-    }
-
     @Override
     public String toString(){
         String stackString = "";
@@ -91,37 +111,17 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
-        Deque d = new Deque();
+        Deque<Integer> d = new Deque<Integer>();
         d.addFirst(0);
-        System.out.println(d);
-//        [0]
         d.addFirst(1);
-        System.out.println(d);
-//        [1,0]
         d.addLast(2);
-        System.out.println(d);
-//        [1,0,2]
         d.addLast(3);
-        System.out.println(d);
-
         d.addFirst(8);
-        System.out.println(d);
-
         d.removeFirst();
-        System.out.println(d);
-
         d.removeFirst();
-        System.out.println(d);
-
         d.removeLast();
-        System.out.println(d);
-
         d.removeLast();
         d.removeFirst();
-        System.out.println(d);
-        d.removeFirst();
-
-        System.out.println(d.isEmpty());
     }
 
 }
