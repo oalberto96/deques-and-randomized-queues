@@ -70,7 +70,9 @@ public class Deque<Item> implements Iterable<Item> {
         Node oldLast = last;
         last = new Node(item);
         last.prev = oldLast;
-        oldLast.next = last;
+        if(oldLast != null){
+            oldLast.next = last;
+        }
         if(first == null) first = last;
     }
 
