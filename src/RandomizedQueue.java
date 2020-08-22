@@ -3,11 +3,11 @@ import java.util.NoSuchElementException;
 
 import edu.princeton.cs.algs4.StdRandom;
 
-public class RandomizeQueue<Item> implements Iterable<Item>{
+public class RandomizedQueue<Item> implements Iterable<Item>{
     private Item[] queue;
     private int N = 0;
 
-    public RandomizeQueue() {
+    public RandomizedQueue() {
         queue = (Item[]) new Object[1];
     }
 
@@ -97,7 +97,7 @@ public class RandomizeQueue<Item> implements Iterable<Item>{
     }
 
     public static void main(String[] args){
-        RandomizeQueue<Integer> r = new RandomizeQueue<Integer>();
+        RandomizedQueue<Integer> r = new RandomizedQueue<Integer>();
         r.enqueue(4);
         r.enqueue(8);
         r.enqueue(3);
